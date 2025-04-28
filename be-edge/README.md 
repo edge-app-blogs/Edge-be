@@ -1,0 +1,107 @@
+Here’s a description of the directories and files in English, formatted for a README.md file:
+
+```markdown
+# Project Structure
+
+This project follows a clean architecture, separating different concerns into directories to ensure maintainability, extensibility, and testability. Below is a description of the main directories and files in the project.
+
+## Directory Structure
+
+```
+go-sqlite-crud/
+│
+├── cmd/                    # Application entry point (main.go)
+│   └── app/                # Folder containing the main.go file
+│       └── main.go         # Main file to start the application
+│
+├── internal/               # Core business logic and application code
+│   ├── domain/             # Defines business entities and models
+│   │   └── post.go         # Post entity definition
+│   │
+│   ├── repository/         # Database interaction logic
+│   │   ├── post.go         # Post repository to handle CRUD operations for Post
+│   │   └── db.go           # Database configuration and setup
+│   │
+│   ├── service/            # Business logic layer, including decorators
+│   │   ├── post_service.go # Logic to manage Post
+│   │   └── decorator.go    # Decorators to extend CRUD functionality
+│   │
+│   └── handler/            # HTTP controller layer (RESTful endpoints)
+│       └── post_handler.go # Controller to manage Post-related HTTP requests
+│
+├── pkg/                    # Reusable utility packages
+│   └── utils/              # Common functions
+│       └── response.go     # Function to format HTTP responses
+│
+├── go.mod                  # Go dependencies
+├── go.sum                  # Go dependency checksum
+└── README.md               # Project documentation
+```
+
+## Directory and File Descriptions
+
+### `cmd/`
+This directory contains the entry point for the application (`main.go`). It is where the server is started, and the routes are defined.
+
+- **app/main.go**: The main file that initializes the application and sets up the HTTP server.
+
+### `internal/`
+This directory contains the core logic of the application, including the domain models, repositories for database interaction, services for business logic, and handlers for HTTP requests.
+
+- **domain/**: Defines the business models and entities that the application operates on.
+  - **post.go**: Defines the `Post` entity, representing a blog post or article with fields like `ID`, `Title`, `Content`, `CreatedAt`, `Creator`, and `Category`.
+  
+- **repository/**: Contains code for interacting with the database.
+  - **post.go**: Contains the implementation for the `PostRepository`, which handles CRUD operations for `Post` entities.
+  - **db.go**: Configures and connects to the database (SQLite in this case).
+
+- **service/**: Contains the business logic that applies to `Post` entities. It also includes decorators to add additional functionality, such as validation or logging.
+  - **post_service.go**: Implements logic to create, retrieve, update, and delete `Post` entities.
+  - **decorator.go**: A decorator to add additional functionality, like title validation before performing CRUD operations on posts.
+
+- **handler/**: Defines the HTTP controllers (also known as endpoints) for handling requests to the application.
+  - **post_handler.go**: Handles incoming HTTP requests for CRUD operations on `Post` entities (such as `POST /posts` to create a post and `GET /posts` to retrieve posts).
+
+### `pkg/`
+This directory contains utility packages that can be reused throughout the project.
+
+- **utils/**: Contains utility functions, such as response formatting.
+  - **response.go**: Provides functions to format and send HTTP responses, ensuring consistency across the application.
+
+### Go Modules
+- **go.mod**: Defines the Go dependencies for the project.
+- **go.sum**: Contains the cryptographic checksums for the dependencies, ensuring their integrity.
+
+### `README.md`
+This file. It contains the documentation for the project, providing an overview of the project structure, purpose, and how to get started.
+
+---
+
+## How to Run
+
+To run the project, follow these steps:
+
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd go-sqlite-crud
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   go mod tidy
+   ```
+
+3. **Start the application:**
+   ```bash
+   go run cmd/app/main.go
+   ```
+
+The application will be available at `http://localhost:8080`.
+
+---
+
+This architecture ensures that the application is modular, testable, and scalable. The separation between repositories, services, handlers, and utilities follows best practices and SOLID principles to maintain clean and maintainable code.
+``` 
+
+This structure organizes the backend cleanly with clear separation of concerns, following best practices and SOLID principles. It provides a maintainable and scalable architecture that can grow as your project evolves.
